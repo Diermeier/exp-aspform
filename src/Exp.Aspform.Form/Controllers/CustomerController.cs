@@ -56,11 +56,11 @@ namespace Exp.Aspform.Form.Controllers
         }
 
         [HttpPost("create")]
-        public ActionResult<CustomerViewModel> Create(CustomerViewModel viewModel)
+        public ActionResult<CustomerViewModel> CreatePostback(CustomerViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                return View(nameof(Create), viewModel);
             }
 
             var maxId = SingletonDataStore.Max(o => o.Id);
@@ -101,19 +101,24 @@ namespace Exp.Aspform.Form.Controllers
         }
 
         [HttpPost("update/{id}")]
-        public ActionResult<CustomerViewModel> Update(CustomerViewModel viewModel)
+        public ActionResult<CustomerViewModel> UpdatePostback(int id, CustomerViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                return View(nameof(Update), viewModel);
             }
 
-            var customer = SingletonDataStore.FirstOrDefault(o => o.Id == viewModel.Id);
+            var existingCustomer = SingletonDataStore.FirstOrDefault(o => o.Id == id);
 
-            if (customer == null)
+            if (existingCustomer == null)
             {
                 return NotFound();
             }
+
+            existingCustomer.Name = viewModel.Name;
+            existingCustomer.Number = viewModel.Number;
+            existingCustomer.RegisteredAt = viewModel.RegisteredAt;
+            existingCustomer.Sex = viewModel.Sex;
 
             return RedirectToAction("");
         }
@@ -134,9 +139,9 @@ namespace Exp.Aspform.Form.Controllers
         }
 
         [HttpPost("delete/{id}")]
-        public ActionResult<CustomerViewModel> Delete(CustomerViewModel viewModel)
+        public ActionResult<CustomerViewModel> DeletePostback(int id)
         {
-            var customer = SingletonDataStore.FirstOrDefault(o => o.Id == viewModel.Id);
+            var customer = SingletonDataStore.FirstOrDefault(o => o.Id == id);
 
             if (customer == null)
             {
