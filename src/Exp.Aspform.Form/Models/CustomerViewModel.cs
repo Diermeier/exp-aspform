@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Exp.Aspform.Form.Models
 {
@@ -11,8 +12,12 @@ namespace Exp.Aspform.Form.Models
 
     public class CustomerViewModel
     {
+        [Editable(false)]
         public int Id { get; set; }   
-        public string Name { get; set; }
+
+        public string Name { get; set; } = string.Empty;
+
+        [Range(1000, 1999)]
         public int Number { get; set; }
         public DateTime RegisteredAt { get; set; }
         public Sex Sex { get; set; }
