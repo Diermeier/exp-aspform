@@ -1,0 +1,10 @@
+@model CustomerViewModel
+
+<label>@Model.Name</label>
+
+<p>Sure delete "@Model.Name"?</p>
+
+@using (@Html.BeginForm())
+{
+    <input type="submit" value="Löschen" id="btnSubmit" />
+}

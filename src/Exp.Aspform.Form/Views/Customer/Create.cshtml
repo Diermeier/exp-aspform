@@ -1,0 +1,7 @@
+@model CustomerViewModel
+
+@using (@Html.BeginForm())
+{
+    @Html.TextBoxFor(m => m.Name)
+    <input type="submit" value="Save" name="edit" id="btnSubmit" />
+}

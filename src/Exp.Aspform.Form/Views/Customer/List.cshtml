@@ -1,0 +1,16 @@
+@model IEnumerable<CustomerViewModel>
+
+@Html.ActionLink("+ Create Customer", "create", "customer")
+
+<li>
+@foreach (var viewModel in Model.OrderBy(o => o.Id))
+{
+    <ul>
+        @Html.ActionLink($"👁️ {viewModel.Name} ({viewModel.Id})", null, "customer", new { id = viewModel.Id })
+        |
+        @Html.ActionLink("✏️ Edit", "update", "customer", new { id = viewModel.Id })
+        |
+        @Html.ActionLink("🗑️ Delete", "delete", "customer", new { id = viewModel.Id })
+    </ul>
+}
+</li>
