@@ -22,7 +22,6 @@ namespace Exp.Aspform.Form.Models
         public int Number { get; set; }
         public DateTime RegisteredAt { get; set; }
 
-        [UIHint("DropDown")]
         public Sex Sex { get; set; }
     }
 }
