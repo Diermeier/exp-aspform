@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Exp.Aspform.Form.Models
@@ -20,6 +21,8 @@ namespace Exp.Aspform.Form.Models
         [Range(1000, 1999)]
         public int Number { get; set; }
         public DateTime RegisteredAt { get; set; }
+
+        [UIHint("DropDown")]
         public Sex Sex { get; set; }
     }
 }
