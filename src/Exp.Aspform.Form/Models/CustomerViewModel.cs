@@ -22,6 +22,9 @@ namespace Exp.Aspform.Form.Models
         public int Number { get; set; }
         public DateTime RegisteredAt { get; set; }
 
+        [DropDownHint(nameof(SexSource))]
         public Sex Sex { get; set; }
+
+        public IEnumerable<Sex> SexSource { get; } = new [] { Sex.Male, Sex.Female, };
     }
 }

@@ -1,0 +1,53 @@
+ @using System;
+ @using System.Collections;
+
+@{
+    SelectList? selectList = null;
+    var model = ((object)Model);
+    var type = ViewData.ModelMetadata.ModelType;
+    var modelPropertyName = ViewData.ModelMetadata.PropertyName!;
+
+    var ownerType = this.ViewData.ModelMetadata.ContainerType!;
+    var owner = this.ViewData.ModelExplorer.Container.Model;
+
+    var modelPropertyType = ownerType.GetProperty(modelPropertyName)!;
+    var dropDownAttribute = modelPropertyType.GetCustomAttributes(true)
+        .OfType<DropDownHintAttribute>()
+        .Single()
+        ;
+
+    var dropDownSourceProperty = ownerType.GetProperty(dropDownAttribute.DropDownSourcePropertyName)!;
+    var dropDownSourcedd = dropDownSourceProperty.GetValue(owner);
+    var dropDownSource = dropDownSourceProperty.GetValue(owner) as IEnumerable;
+    
+    if (type.IsClass)
+    {
+        this.ToString();
+    }
+    else
+    {
+        bool isNullabelEnum = false; 
+
+        // TODO: Make nullable enum check nicer.
+        if (!type.IsEnum)
+        {
+            type = Nullable.GetUnderlyingType(type);
+            isNullabelEnum = true;
+        } 
+
+        if (type?.IsEnum == true)
+        {
+            var enumValues = Enum.GetValues(type);
+
+            // TODO: If the property is nullable then there should be a null value for selection too.
+            //if (isNullabelEnum)
+            //{
+            //    enumValues = new[] { null }.Concat(enumValues);
+            //}
+
+            selectList = new SelectList(dropDownSource);
+        }
+    }
+}
+
+@Html.DropDownListFor(m => m, selectList)
