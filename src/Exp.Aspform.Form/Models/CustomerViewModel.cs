@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Exp.Aspform.Form.UIHintAttributes;
 
 namespace Exp.Aspform.Form.Models
 {

@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Exp.Aspform.Form.Models
+namespace Exp.Aspform.Form.UIHintAttributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class DropDownHintAttribute : UIHintAttribute
