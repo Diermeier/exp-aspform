@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Exp.Aspform.Form.UIHintAttributes;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Exp.Aspform.Form.Models
 {
@@ -14,13 +15,14 @@ namespace Exp.Aspform.Form.Models
 
     public class CustomerViewModel
     {
-        [Editable(false)]
+        [HiddenInput]
         public int Id { get; set; }   
 
         public string Name { get; set; } = string.Empty;
 
         [Range(1000, 1999)]
         public int Number { get; set; }
+
         public DateTime RegisteredAt { get; set; }
 
         [DropDownHint(nameof(SexSource))]

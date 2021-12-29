@@ -20,7 +20,7 @@
     var dropDownSourceProperty = ownerType.GetProperty(dropDownAttribute.DropDownSourcePropertyName)!;
     var dropDownSourcedd = dropDownSourceProperty.GetValue(owner);
     var dropDownSource = dropDownSourceProperty.GetValue(owner) as IEnumerable;
-    
+
     if (type.IsClass)
     {
         this.ToString();
